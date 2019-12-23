@@ -1,18 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.scss';
 
-const App: React.FC = () => {
-  const [count, setCount] = useState(3);
+export interface IStateProps {
+  count: number;
+  increment: () => void;
+  decrement: () => void;
+  reset: () => void;
+}
 
+export interface IAppProps extends IStateProps {};
+
+export const App: React.FC<IAppProps> = ({
+  count,
+  increment,
+  decrement,
+  reset
+}) => {
   return (
-    <div 
-      className="App"
-      onClick={() => setCount(count + 1)}
-      onMouseDown={e => e.preventDefault()}
-    >
-      {`Hello D${count}!`}
+    <div className="App">
+      <div>
+        <button onClick={increment}>INCREMENT</button>
+        <button onClick={decrement}>DECREMENT</button>
+        <button onClick={reset}>RESET</button>
+      </div>
+      <div>
+        {count}
+      </div>
     </div>
   );
 }
-
-export default App;
